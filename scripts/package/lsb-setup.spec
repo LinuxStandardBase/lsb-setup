@@ -26,7 +26,7 @@ Basic LSB /opt/lsb filesystem package
 %install
 
 rm -rf ${RPM_BUILD_ROOT}
-mkdir -p ${RPM_BUILD_ROOT}%{basedir}/{bin,doc,share,man/{man1,man3}}
+mkdir -p ${RPM_BUILD_ROOT}%{basedir}/{bin,doc,share,test,man/{man1,man3}}
 
 #==================================================
 %clean
@@ -41,6 +41,7 @@ fi
 %dir %{basedir}/bin
 %dir %{basedir}/doc
 %dir %{basedir}/share
+%dir %{basedir}/test
 %dir %{basedir}/man
 %dir %{basedir}/man/man1
 %dir %{basedir}/man/man3
