@@ -82,6 +82,7 @@ fi
 %dir %{basedir}
 %dir %{basedir}/bin
 %dir %{basedir}/doc
+%dir %{basedir}/include
 %dir %{basedir}/share
 %dir %{basedir}/test
 %dir %{basedir}/man
@@ -92,6 +93,9 @@ fi
 
 #==================================================
 %changelog
+* Sat Nov 08 2008 Stew Benedict <stewb@linux-foundation.org>
+- own /opt/lsb/include
+
 * Wed Nov 05 2008 Stew Benedict <stewb@linux-foundation.org>
 - own /opt/lsb/lib{64}
 - manage the updates from beta/snapshots for the lib/lib-4.0 swap
