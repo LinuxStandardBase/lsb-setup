@@ -26,7 +26,7 @@ Basic LSB /opt/lsb filesystem package
 %install
 
 rm -rf ${RPM_BUILD_ROOT}
-mkdir -p ${RPM_BUILD_ROOT}%{basedir}/{bin,doc,share,test,man/{man1,man3}}
+mkdir -p ${RPM_BUILD_ROOT}%{basedir}/{bin,doc,include,share,test,man/{man1,man3}}
 mkdir ${RPM_BUILD_ROOT}%{basedir}/lib
 mkdir ${RPM_BUILD_ROOT}%{basedir}/lib64
 
