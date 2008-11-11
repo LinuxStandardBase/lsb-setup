@@ -41,6 +41,14 @@ if [ -d /opt/lsb/lib64-4.0 -a -h /opt/lsb/lib64 ];then
   mv /opt/lsb/lib64-4.0 /opt/lsb/lib64-4.0.old
   rm -f /opt/lsb/lib64
 fi
+# since we do not own /opt. and debian/ubuntu pkgs do not either
+# it's possible to lose /opt altogether with installs/uninstalls
+# and then the perms are all messed up for the next cycle
+if [ ! -d /opt ];then
+  mkdir /opt
+  chown root:root /opt
+  chmod 0755 /opt
+fi
 
 %post
 if [ -d /opt/lsb/lib-4.0.old ];then
