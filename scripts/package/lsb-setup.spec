@@ -11,7 +11,7 @@ URL: http://www.linuxfoundation.org/bzr/unofficial/lsb-setup
 BuildRoot: %{_tmppath}/%{name}-root
 AutoReqProv: no
 BuildArch: noarch
-Requires: lsb >= 4.0
+Requires: lsb
 
 %description
 Basic LSB /opt/lsb filesystem package
@@ -101,6 +101,9 @@ fi
 
 #==================================================
 %changelog
+* Fri Nov 21 2008 Stew Benedict <stewb@linux-foundation.org>
+- only require "lsb"
+
 * Sat Nov 08 2008 Stew Benedict <stewb@linux-foundation.org>
 - own /opt/lsb/include
 
