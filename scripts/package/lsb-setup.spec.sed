@@ -1,9 +1,12 @@
+# %{ver}, %{rel} are provided my the Makefile
+%define ver @VERSION@
+%define rel @RELEASE@
 %define basedir /opt/lsb
  
 # %{version}, %{rel} are provided by the Makefile
 Summary: LSB setup
 Name: lsb-setup
-Version: %{version}
+Version: %{ver}
 Release: %{rel}
 License: GPL
 Group: Development/Tools
