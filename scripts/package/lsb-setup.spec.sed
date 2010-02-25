@@ -30,21 +30,21 @@ Basic LSB /opt/lsb filesystem package
 
 rm -rf ${RPM_BUILD_ROOT}
 mkdir -p ${RPM_BUILD_ROOT}%{basedir}/{bin,doc,include,share,test,man/{man1,man3}}
-mkdir ${RPM_BUILD_ROOT}%{basedir}/lib
-mkdir ${RPM_BUILD_ROOT}%{basedir}/lib64
 
 #=================================================
-# this whole dance is to handle upgrades from 4.0 beta/snapshots
+# this whole dance is to handle upgrades from older 4.0 releases
 %pre
 if [ -h /opt/lsb/lib-4.0 -a -d /opt/lsb/lib ];then
   mv /opt/lsb/lib /opt/lsb/lib-old
   rm -f /opt/lsb/lib-4.0
   mkdir /opt/lsb/lib-4.0
+  (cd /opt/lsb && ln -s lib-4.0 lib)
 fi
 if [ -h /opt/lsb/lib64-4.0 -a -d /opt/lsb/lib64 ];then
   mv /opt/lsb/lib64 /opt/lsb/lib64-old
   rm -f /opt/lsb/lib64-4.0
   mkdir /opt/lsb/lib64-4.0
+  (cd /opt/lsb && ln -s lib64-4.0 lib64)
 fi
 # since we do not own /opt. and debian/ubuntu pkgs do not either
 # it's possible to lose /opt altogether with installs/uninstalls
@@ -101,8 +101,6 @@ fi
 %dir %{basedir}/man
 %dir %{basedir}/man/man1
 %dir %{basedir}/man/man3
-%dir %{basedir}/lib
-%dir %{basedir}/lib64
 
 #==================================================
 %changelog
