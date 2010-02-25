@@ -39,10 +39,12 @@ mkdir ${RPM_BUILD_ROOT}%{basedir}/lib64
 if [ -h /opt/lsb/lib-4.0 -a -d /opt/lsb/lib ];then
   mv /opt/lsb/lib /opt/lsb/lib-old
   rm -f /opt/lsb/lib-4.0
+  mkdir /opt/lsb/lib-4.0
 fi
 if [ -h /opt/lsb/lib64-4.0 -a -d /opt/lsb/lib64 ];then
   mv /opt/lsb/lib64 /opt/lsb/lib64-old
   rm -f /opt/lsb/lib64-4.0
+  mkdir /opt/lsb/lib64-4.0
 fi
 # since we do not own /opt. and debian/ubuntu pkgs do not either
 # it's possible to lose /opt altogether with installs/uninstalls
