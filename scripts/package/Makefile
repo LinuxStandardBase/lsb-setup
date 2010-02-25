@@ -9,9 +9,11 @@ RELEASE=4
 ISO_DATE=$(shell date +"%Y%m%d")
 PWD=$(shell pwd)
 
-FULL_PACKAGE_NAME=$(PACKAGE)-$(VERSION)
+FULL_PACKAGE_NAME=$(PACKAGE)-$(VERSION)$(VERSION_SUFFIX)
 RPM_BINARY_NAME=$(FULL_PACKAGE_NAME)-$(RELEASE).$(RPM_BUILD_ARCH).rpm
 RPM_SOURCE_NAME=$(FULL_PACKAGE_NAME)-$(RELEASE).src.rpm
+
+FULL_VERSION=$(VERSION)$(VERSION_SUFFIX)
 
 # Temporary build directory
 TMP_BUILD_DIR=/tmp/$(FULL_PACKAGE_NAME)
@@ -61,7 +63,7 @@ clean:
 
 # Specfile generation rule
 %.spec : %.spec.sed
-	sed -e "s#@VERSION@#`echo $(VERSION)`#" -e "s#@RELEASE@#`echo $(RELEASE)`#" < $< > $@
+	sed -e "s#@VERSION@#`echo $(FULL_VERSION)`#" -e "s#@RELEASE@#`echo $(RELEASE)`#" < $< > $@
 
 deb_package: rpm_package
 	@fakeroot alien -cdk $(RPM_BINARY_NAME)
