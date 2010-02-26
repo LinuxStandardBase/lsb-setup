@@ -30,19 +30,17 @@ Basic LSB /opt/lsb filesystem package
 
 rm -rf ${RPM_BUILD_ROOT}
 mkdir -p ${RPM_BUILD_ROOT}%{basedir}/{bin,doc,include,share,test,man/{man1,man3}}
-mkdir ${RPM_BUILD_ROOT}%{basedir}/lib
-mkdir ${RPM_BUILD_ROOT}%{basedir}/lib64
 
 #=================================================
-# this whole dance is to handle upgrades from 4.0 beta/snapshots
+# this whole dance is to handle upgrades from older 4.0 releases
 %pre
-if [ -d /opt/lsb/lib-4.0 -a -h /opt/lsb/lib ];then
-  mv /opt/lsb/lib-4.0 /opt/lsb/lib-4.0.old
-  rm -f /opt/lsb/lib
+if [ -h /opt/lsb/lib-4.0 -a -d /opt/lsb/lib ];then
+  rm -f /opt/lsb/lib-4.0
+  mv /opt/lsb/lib /opt/lsb/lib-4.0
 fi
-if [ -d /opt/lsb/lib64-4.0 -a -h /opt/lsb/lib64 ];then
-  mv /opt/lsb/lib64-4.0 /opt/lsb/lib64-4.0.old
-  rm -f /opt/lsb/lib64
+if [ -h /opt/lsb/lib64-4.0 -a -d /opt/lsb/lib64 ];then
+  rm -f /opt/lsb/lib64-4.0
+  mv /opt/lsb/lib64 /opt/lsb/lib64-4.0
 fi
 # since we do not own /opt. and debian/ubuntu pkgs do not either
 # it's possible to lose /opt altogether with installs/uninstalls
@@ -54,31 +52,11 @@ if [ ! -d /opt ];then
 fi
 
 %post
-if [ -d /opt/lsb/lib-4.0.old ];then
-  cd /opt/lsb/lib-4.0.old
-  for file in `find .`;do
-    if [ ! -e /opt/lsb/lib/$file ];then
-      mv $file /opt/lsb/lib/$file
-    fi
-  done
-  rm -fr /opt/lsb/lib-4.0.old
-  cd /opt/lsb
-  if [ ! -e lib-4.0 ];then
-    ln -s lib lib-4.0
-  fi
+if [ -d /opt/lsb/lib-4.0 ]; then
+  (cd /opt/lsb && ln -s lib-4.0 lib)
 fi
-if [ -d /opt/lsb/lib64-4.0.old ];then
-  cd /opt/lsb/lib64-4.0.old
-  for file in `find .`;do
-    if [ ! -e /opt/lsb/lib64/$file ];then
-      mv $file /opt/lsb/lib64/$file
-    fi
-  done
-  rm -fr /opt/lsb/lib64-4.0.old
-  cd /opt/lsb
-  if [ ! -e lib64-4.0 ];then
-    ln -s lib64 lib64-4.0
-  fi
+if [ -d /opt/lsb/lib64-4.0 ]; then
+  (cd /opt/lsb && ln -s lib64-4.0 lib64)
 fi
 
 #==================================================
@@ -99,8 +77,6 @@ fi
 %dir %{basedir}/man
 %dir %{basedir}/man/man1
 %dir %{basedir}/man/man3
-%dir %{basedir}/lib
-%dir %{basedir}/lib64
 
 #==================================================
 %changelog
