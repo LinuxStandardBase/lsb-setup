@@ -31,17 +31,7 @@ Basic LSB /opt/lsb filesystem package
 rm -rf ${RPM_BUILD_ROOT}
 mkdir -p ${RPM_BUILD_ROOT}%{basedir}/{bin,doc,include,share,test,man/{man1,man3}}
 
-#=================================================
-# this whole dance is to handle upgrades from older 4.0 releases
 %pre
-if [ -h /opt/lsb/lib-4.0 -a -d /opt/lsb/lib ];then
-  rm -f /opt/lsb/lib-4.0
-  mv /opt/lsb/lib /opt/lsb/lib-4.0
-fi
-if [ -h /opt/lsb/lib64-4.0 -a -d /opt/lsb/lib64 ];then
-  rm -f /opt/lsb/lib64-4.0
-  mv /opt/lsb/lib64 /opt/lsb/lib64-4.0
-fi
 # since we do not own /opt. and debian/ubuntu pkgs do not either
 # it's possible to lose /opt altogether with installs/uninstalls
 # and then the perms are all messed up for the next cycle
@@ -49,14 +39,6 @@ if [ ! -d /opt ];then
   mkdir /opt
   chown root:root /opt
   chmod 0755 /opt
-fi
-
-%post
-if [ -d /opt/lsb/lib-4.0 ]; then
-  (cd /opt/lsb && ln -s lib-4.0 lib)
-fi
-if [ -d /opt/lsb/lib64-4.0 ]; then
-  (cd /opt/lsb && ln -s lib64-4.0 lib64)
 fi
 
 #==================================================
