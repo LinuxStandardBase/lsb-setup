@@ -25,7 +25,7 @@ VERSION_SUFFIX=
 # EXPORT_TAG should be set to the cvs tag to use
 EXPORT_TAG=-r $(OFFICIAL_RELEASE)
 else
-VERSION_SUFFIX=.$(ISO_DATE)
+VERSION_SUFFIX=.0.$(ISO_DATE)
 EXPORT_TAG=-D now
 endif
 
