@@ -1,7 +1,7 @@
 # XXX We should play the usual tricks defining stuff here and building
 # XXX a specfile from this info, but not yet: for now keep in sync
 PACKAGE=lsb-setup
-VERSION=4.1.0
+VERSION=5.0.0
 RELEASE=1
 
 #
