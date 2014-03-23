@@ -9,11 +9,11 @@ RELEASE=1
 ISO_DATE=$(shell date +"%Y%m%d")
 PWD=$(shell pwd)
 
-FULL_PACKAGE_NAME=$(PACKAGE)-$(VERSION)$(VERSION_SUFFIX)
+FULL_PACKAGE_NAME=$(PACKAGE)-$(VERSION)
 RPM_BINARY_NAME=$(FULL_PACKAGE_NAME)-$(RELEASE).$(RPM_BUILD_ARCH).rpm
 RPM_SOURCE_NAME=$(FULL_PACKAGE_NAME)-$(RELEASE).src.rpm
 
-FULL_VERSION=$(VERSION)$(VERSION_SUFFIX)
+FULL_VERSION=$(VERSION)
 
 # Temporary build directory
 TMP_BUILD_DIR=/tmp/$(FULL_PACKAGE_NAME)
@@ -21,11 +21,10 @@ TMP_BUILD_DIR=/tmp/$(FULL_PACKAGE_NAME)
 # Handle different version generation for snapshots than for official builds
 # OFFICIAL_RELEASE should be set to the tag to extract from CVS
 ifdef OFFICIAL_RELEASE
-VERSION_SUFFIX=
 # EXPORT_TAG should be set to the cvs tag to use
 EXPORT_TAG=-r $(OFFICIAL_RELEASE)
 else
-VERSION_SUFFIX=.0.$(ISO_DATE)
+RELEASE=0.$(ISO_DATE)
 EXPORT_TAG=-D now
 endif
 
